@@ -1,15 +1,14 @@
 $(document).ready(function () {
-    $('.gejala').select2();
     $(".close").click(function () {
         $(this)
             .parent(".alert")
             .fadeOut();
     });
     $('.prov').on('change', function() {
-        var id_prov = $(this).val();
-        if (id_prov) {
+        var prov_id = $(this).val();
+        if (prov_id) {
             $.ajax({
-                url: 'kab/' + id_prov,
+                url: 'kab/' + prov_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {

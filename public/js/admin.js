@@ -1,10 +1,5 @@
-let crash = new DataTable('#crash');
-let dashboard = new DataTable('#dashboard');
-let engineer = new DataTable('#engineer');
-let gejala = new DataTable('#gejala');
-let kabupaten = new DataTable('#kabupaten');
-let provinsi = new DataTable('#provinsi');
-let report = new DataTable('#report');
-let rule = new DataTable('#rule');
-let tutorial = new DataTable('#tutorial');
-let user = new DataTable('#user');
+let category = new DataTable('#category');
+let factory = new DataTable('#factory');
+let product = new DataTable('#product');
+let materials = new DataTable('#materials');
+let component = new DataTable('#component');

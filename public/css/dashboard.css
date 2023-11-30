@@ -148,6 +148,12 @@ input[type="submit"] {
     text-decoration: none;
 }
 
+.btn-field {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
 .btn-input {
     margin-bottom: 10px;
 }

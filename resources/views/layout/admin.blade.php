@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title') - Admin RusakApa</title>
+    <title>@yield('title') - Admin ERP</title>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,29 +19,27 @@
             <li class="has-subnav"><a href="/dashboard"><i class="fa fa-laptop fa-2x"></i><span class="nav-text">
                         Dashboard</span></a></li>
             <li class="has-subnav">
-                <a href="#">
-                    <i class="fa fa-map fa-2x"></i>
-                    <span class="nav-text"> Lokasi</span>
+                <a href="/product">
+                    <i class="fa fa-cogs fa-2x"></i>
+                    <span class="nav-text"> Produk</span>
                 </a>
                 <ul>
-                    <li><a href="/provinsi">Provinsi</a></li>
-                    <li><a href="/kabupaten">Kabupaten</a></li>
+                    <li><a href="/category">Kategori</a></li>
+                    <li><a href="/factory">Pabrik</a></li>
+                    <li><a href="/materials">Bahan Baku</a></li>
+                    <li><a href="/component">Komposisi</a></li>
                 </ul>
             </li>
-            <li class="has-subnav"><a href="/crash"><i class="fa fa-bug fa-2x"></i><span class="nav-text">
-                        Kerusakan</span></a></li>
-            <li class="has-subnav"><a href="/gejala"><i class="fa fa-tasks fa-2x"></i><span class="nav-text">
-                        Gejala</span></a></li>
-            <li class="has-subnav"><a href="/report"><i class="fa fa-book fa-2x"></i><span class="nav-text">
-                        Laporan</span></a></li>
-            <li class="has-subnav"><a href="/rule"><i class="fa fa-map-signs fa-2x"></i><span class="nav-text">
-                        Aturan</span></a></li>
-            <li class="has-subnav"><a href="/tutorial"><i class="fa fa-cogs fa-2x"></i><span class="nav-text">
-                        Tutorial</span></a></li>
-            <li class="has-subnav"><a href="/engineer"><i class="fa fa-wrench fa-2x"></i><span class="nav-text">
-                        Teknisi</span></a></li>
-            <li class="has-subnav"><a href="/user"><i class="fa fa-address-card fa-2x"></i><span class="nav-text">
-                        User</span></a></li>
+            <li class="has-subnav"><a href="/production"><i class="fa fa-industry fa-2x"></i><span class="nav-text">
+                        Produksi</span></a></li>
+            <li class="has-subnav"><a href="/vendor"><i class="fa fa-address-book fa-2x"></i><span class="nav-text">
+                        Vendor</span></a></li>
+            <li class="has-subnav"><a href="/purchase"><i class="fa fa-shopping-cart fa-2x"></i><span class="nav-text">
+                        Pembelian</span></a></li>
+            <li class="has-subnav"><a href="/selling"><i class="fa fa-money fa-2x"></i><span class="nav-text">
+                        Penjualan</span></a></li>
+            <li class="has-subnav"><a href="/customer"><i class="fa fa-users fa-2x"></i><span class="nav-text">
+                        Pelanggan</span></a></li>
         </ul>
         <ul class="logout">
             <li><a href="#"><i class="fa fa-power-off fa-2x"></i><span class="nav-text"> Logout</span></a></li>
@@ -64,6 +62,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/ajax.js"></script>
+    @stack('script')
 </body>
 
 </html>

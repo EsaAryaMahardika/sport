@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class factory extends Model
+class kabupaten extends Model
 {
     use HasFactory;
-    protected $table = 'factory';
-    protected $guarded = [];
+    protected $table = 'kabupaten';
+    public $incrementing = false;
+    protected $keytype = 'string';
+    public $timestamps = false;
+    protected $fillable = ['id', 'id_prov', 'nama'];
     public function prov()
     {
         return $this->belongsTo(provinsi::class);
-    }
-    public function kab()
-    {
-        return $this->belongsTo(kabupaten::class);
     }
 }
