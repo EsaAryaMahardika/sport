@@ -36,7 +36,6 @@ Route::delete('/category/{id}', [DBController::class, 'd_category']);
 
 Route::get('/component', [DBController::class, 'component']);
 Route::post('/component', [DBController::class, 'i_component']);
-Route::put('/component/{id}', [DBController::class, 'u_component']);
 Route::delete('/component/{id}', [DBController::class, 'd_component']);
 
 Route::get('/production', [DBController::class, 'production']);

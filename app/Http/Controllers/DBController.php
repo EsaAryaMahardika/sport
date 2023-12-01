@@ -133,18 +133,18 @@ class DBController extends Controller
         for($i = 0; $i < count($materialsID); $i++){
             $sync_data[$materialsID[$i]] = ['jumlah' => $jumlahMaterials[$i]];
         }
-        $product->materials()->attach($sync_data);
+        $product->materials()->sync($sync_data);
         $product->update([
             'harga' =>$request->input('harga'),
         ]);
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Data berhasil ditambahkan.');
         return redirect('/component');
     }
-    function u_component(Request $request, $id) {
-
-    }
     function d_component($id) {
-
+        $product = product::find($id);
+        $product->materials()->detach();
+        Session::flash('success', 'Data berhasil dihapus.');
+        return redirect('/component');
     }
     function category() {
         $category = category::all();
