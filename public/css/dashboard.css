@@ -143,12 +143,12 @@ input[type="submit"] {
     line-height: 30px;
     padding: 5px 10px;
     text-align: center;
-    width: 100px;
+    width: auto;
     display: inline-block;
     text-decoration: none;
 }
 
-.btn-field {
+.center {
     display: flex;
     justify-content: center;
     margin-bottom: 1em;

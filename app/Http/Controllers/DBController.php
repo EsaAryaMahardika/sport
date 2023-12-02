@@ -32,14 +32,14 @@ class DBController extends Controller
         $filePath = pathinfo($path, PATHINFO_BASENAME);
         product::create([
             'nama' => $request->input('nama'),
-            'category_id' =>$request->input('category_id'),
-            'harga' =>$request->input('harga'),
-            'factory_id' =>$request->input('factory_id'),
-            'foto' =>$filePath,
+            'category_id' => $request->input('category_id'),
+            'harga' => $request->input('harga'),
+            'factory_id' => $request->input('factory_id'),
+            'foto' => $filePath,
             'created_at' =>$currentTime,
             'updated_at' =>$currentTime
         ]);
-        Session::flash('success', 'Data berhasil ditambahkan.');
+        Session::flash('success', 'Produk berhasil ditambahkan.');
         return redirect('/product');
     }
     function u_product(Request $request, $id) {
@@ -66,13 +66,13 @@ class DBController extends Controller
                 'updated_at' =>$currentTime
             ]);
         }
-        Session::flash('success', 'Data berhasil diubah');
+        Session::flash('success', 'Produk berhasil diubah');
         return redirect('/product');
     }
     function d_product($id) {
         $product = product::find($id);
         $product->delete();
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Produk berhasil dihapus.');
         return redirect('/product');
     }
     function factory() {
@@ -83,19 +83,19 @@ class DBController extends Controller
     }
     function i_factory(Request $request) {
         factory::create($request->all());
-        Session::flash('success', 'Data berhasil ditambahkan.');
+        Session::flash('success', 'Pabrik berhasil ditambahkan.');
         return redirect('/factory');
     }
     function u_factory(Request $request, $id) {
         $factory = factory::find($id);
         $factory->update($request->all());
-        Session::flash('success', 'Data berhasil diubah.');
+        Session::flash('success', 'Pabrik berhasil diubah.');
         return redirect('/factory');
     }
     function d_factory($id) {
         $factory = factory::find($id);
         $factory->delete();
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Pabrik berhasil dihapus.');
         return redirect('/factory');
     }
     function materials() {
@@ -104,19 +104,19 @@ class DBController extends Controller
     }
     function i_materials(Request $request) {
         materials::create($request->all());
-        Session::flash('success', 'Data berhasil ditambahkan.');
+        Session::flash('success', 'Bahan Baku berhasil ditambahkan.');
         return redirect('/materials');
     }
     function u_materials(Request $request, $id) {
         $materials = materials::find($id);
         $materials->update($request->all());
-        Session::flash('success', 'Data berhasil diubah.');
+        Session::flash('success', 'Bahan Baku berhasil diubah.');
         return redirect('/materials');
     }
     function d_materials($id) {
         $materials = materials::find($id);
         $materials->delete();
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Bahan Baku berhasil dihapus.');
         return redirect('/materials');
     }
     function component() {
@@ -137,13 +137,13 @@ class DBController extends Controller
         $product->update([
             'harga' =>$request->input('harga'),
         ]);
-        Session::flash('success', 'Data berhasil ditambahkan.');
+        Session::flash('success', 'Komposisi berhasil ditambahkan.');
         return redirect('/component');
     }
     function d_component($id) {
         $product = product::find($id);
         $product->materials()->detach();
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Komposisi berhasil dihapus.');
         return redirect('/component');
     }
     function category() {
@@ -152,32 +152,67 @@ class DBController extends Controller
     }
     function i_category(Request $request) {
         category::create($request->all());
-        Session::flash('success', 'Data berhasil ditambahkan.');
+        Session::flash('success', 'Kategori berhasil ditambahkan.');
         return redirect('/category');
     }
     function u_category(Request $request, $id) {
         $category = category::find($id);
         $category->update($request->all());
-        Session::flash('success', 'Data berhasil diubah.');
+        Session::flash('success', 'Kategori berhasil diubah.');
         return redirect('/category');
     }
     function d_category($id) {
         $category = category::find($id);
         $category->delete();
-        Session::flash('success', 'Data berhasil dihapus.');
+        Session::flash('success', 'Kategori berhasil dihapus.');
         return redirect('/category');
     }
     function production() {
-        
+        $production = production::with('product')->get();
+        $product = product::all();
+        return view('production', compact('production', 'product'));
     }
     function i_production(Request $request) {
-        
+        production::create($request->all());
+        Session::flash('success', 'Produk berhasil masuk antrean.');
+        return redirect('/production');
     }
-    function u_production(Request $request) {
-        
+    function start($id) {
+        $production = production::find($id);
+        $production->update([
+            'status' => 'start'
+        ]);
+        Session::flash('success', 'Produksi telah dimulai.');
+        return redirect('/production');
     }
-    function d_production($id) {
-        
+    function mad(Request $request, $id) {
+        // MENGUBAH STATUS PRODUCTION
+        $production = production::find($id);
+        $currentTime = Carbon::now();
+        $production->update([
+            'status' => 'finish',
+            'selesai' => $currentTime
+        ]);
+        // MENGURANGI STOK MATERIALS
+        $stokM = $request->input('stokM');
+        $materialIds = $request->input('materials_id');
+        foreach ($materialIds as $key => $materialId) {
+            $material = materials::find($materialId);
+            $material->update([
+                'stok' => $stokM[$key]
+            ]);
+        }
+        // MENAMBAH STOK PRODUCT
+        $product = product::find($request->input('product_id'));
+        $product->update([
+            'stok' => $request->input('stokP')
+        ]);
+        Session::flash('success', 'Produksi telah selesai.');
+        return redirect('/production');
+    }
+    function r_production($id) {
+        $production = production::find($id);
+        return view('production', compact('production'));
     }
     function purchase() {
         

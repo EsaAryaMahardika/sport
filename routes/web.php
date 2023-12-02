@@ -40,8 +40,9 @@ Route::delete('/component/{id}', [DBController::class, 'd_component']);
 
 Route::get('/production', [DBController::class, 'production']);
 Route::post('/production', [DBController::class, 'i_production']);
-Route::put('/production/{id}', [DBController::class, 'u_production']);
-Route::delete('/production/{id}', [DBController::class, 'd_production']);
+Route::put('/start/{id}', [DBController::class, 'start']);
+Route::put('/mad/{id}', [DBController::class, 'mad']);
+Route::put('/reportPC/{id}', [DBController::class, 'r_production']);
 
 Route::get('/purchase', [DBController::class, 'purchase']);
 Route::post('/purchase', [DBController::class, 'i_purchase']);

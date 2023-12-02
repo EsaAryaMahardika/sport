@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="btn-field">
+        <div class="center">
             <button type="button" class="btn" id="addMaterialInput">+</button>
         </div>
         <div class="input-group">

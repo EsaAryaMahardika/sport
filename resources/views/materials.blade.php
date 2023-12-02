@@ -28,6 +28,7 @@
       <th>No.</th>
       <th>Nama</th>
       <th>Harga</th>
+      <th>Stok</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -37,6 +38,7 @@
       <td>{{ $loop->iteration }}</td>
       <td>{{ $item->nama }}</td>
       <td>{{ $item->harga }}</td>
+      <td>{{ $item->stok }}</td>
       <td>
         <a href="#edit{{ $item->id }}" class="btn">Edit</a> | <a href="#delete{{ $item->id }}" class="btn">Hapus</a>
       </td>
