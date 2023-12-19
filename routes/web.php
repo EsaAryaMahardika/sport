@@ -42,7 +42,7 @@ Route::get('/production', [DBController::class, 'production']);
 Route::post('/production', [DBController::class, 'i_production']);
 Route::put('/start/{id}', [DBController::class, 'start']);
 Route::put('/mad/{id}', [DBController::class, 'mad']);
-Route::put('/reportPC/{id}', [DBController::class, 'r_production']);
+Route::get('/reportPC/{id}', [DBController::class, 'r_production']);
 
 Route::get('/purchase', [DBController::class, 'purchase']);
 Route::post('/purchase', [DBController::class, 'i_purchase']);
@@ -59,9 +59,9 @@ Route::post('/customer', [DBController::class, 'i_customer']);
 Route::put('/customer/{id}', [DBController::class, 'u_customer']);
 Route::delete('/customer/{id}', [DBController::class, 'd_customer']);
 
-Route::get('/selling', [DBController::class, 'selling']);
-Route::post('/selling', [DBController::class, 'i_selling']);
-Route::put('/selling/{id}', [DBController::class, 'u_selling']);
-Route::delete('/selling/{id}', [DBController::class, 'd_selling']);
+Route::get('/sales', [DBController::class, 'sales']);
+Route::post('/sales', [DBController::class, 'i_sales']);
+Route::put('/sales/{id}', [DBController::class, 'u_sales']);
+Route::delete('/sales/{id}', [DBController::class, 'd_sales']);
 
 Route::get('kab/{id}', [DBController::class, 'kab']);

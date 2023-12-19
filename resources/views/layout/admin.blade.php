@@ -38,7 +38,7 @@
                         Pembelian</span></a></li>
             <li class="has-subnav"><a href="/customer"><i class="fa fa-users fa-2x"></i><span class="nav-text">
                         Pelanggan</span></a></li>
-            <li class="has-subnav"><a href="/selling"><i class="fa fa-money fa-2x"></i><span class="nav-text">
+            <li class="has-subnav"><a href="/sales"><i class="fa fa-money fa-2x"></i><span class="nav-text">
                         Penjualan</span></a></li>
         </ul>
         <ul class="logout">

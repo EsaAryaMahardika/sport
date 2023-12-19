@@ -11,7 +11,7 @@ use App\Models\product;
 use App\Models\production;
 use App\Models\purchase;
 use App\Models\vendor;
-use App\Models\selling;
+use App\Models\sales;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -212,7 +212,7 @@ class DBController extends Controller
     }
     function r_production($id) {
         $production = production::find($id);
-        return view('production', compact('production'));
+        return view('reportPC', compact('production'));
     }
     function purchase() {
         
@@ -244,7 +244,9 @@ class DBController extends Controller
         return view('customer', compact('prov', 'customer'));
     }
     function i_customer(Request $request) {
-        
+        customer::create($request->all());
+        Session::flash('success', 'Konsumen berhasil ditambahkan.');
+        return redirect('/customer');
     }
     function u_customer(Request $request) {
         
@@ -252,16 +254,18 @@ class DBController extends Controller
     function d_customer($id) {
         
     }
-    function selling() {
-
+    function sales() {
+        // $sales = sales::all();
+        return view('sales');
+        // return view('sales', compact('sales'));
     }
-    function i_selling(Request $request) {
+    function i_sales(Request $request) {
         
     }
-    function u_selling(Request $request) {
+    function u_sales(Request $request) {
         
     }
-    function d_selling($id) {
+    function d_sales($id) {
         
     }
     public function kab($id)

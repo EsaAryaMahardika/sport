@@ -4,6 +4,7 @@ let product = new DataTable('#product');
 let materials = new DataTable('#materials');
 let component = new DataTable('#component');
 let production = new DataTable('#production');
+let customer = new DataTable('#customer');
 document.getElementById('addMaterialInput').addEventListener('click', function() {
     const template = document.getElementById('template');
     const inputMaterials = document.getElementById('inputMaterials');

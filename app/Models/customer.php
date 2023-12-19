@@ -10,4 +10,12 @@ class customer extends Model
     use HasFactory;
     protected $table = 'customer';
     protected $guarded = [];
+    public function prov()
+    {
+        return $this->belongsTo(provinsi::class);
+    }
+    public function kab()
+    {
+        return $this->belongsTo(kabupaten::class);
+    }
 }
