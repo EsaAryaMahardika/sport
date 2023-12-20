@@ -10,4 +10,12 @@ class vendor extends Model
     use HasFactory;
     protected $table = 'vendor';
     protected $guarded = [];
+    public function prov()
+    {
+        return $this->belongsTo(provinsi::class);
+    }
+    public function kab()
+    {
+        return $this->belongsTo(kabupaten::class);
+    }
 }

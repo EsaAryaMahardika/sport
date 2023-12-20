@@ -227,16 +227,26 @@ class DBController extends Controller
         
     }
     function vendor() {
-        
+        $vendor = vendor::all();
+        $prov = provinsi::all();
+        return view('vendor', compact('vendor', 'prov'));
     }
     function i_vendor(Request $request) {
-        
+        vendor::create($request->all());
+        Session::flash('success', 'Pemasok berhasil ditambahkan.');
+        return redirect('/vendor');
     }
-    function u_vendor(Request $request) {
-        
+    function u_vendor(Request $request, $id) {
+        $vendor = vendor::find($id);
+        $vendor->update($request->all());
+        Session::flash('success', 'Pemasok berhasil diubah.');
+        return redirect('/vendor');
     }
     function d_vendor($id) {
-        
+        $vendor = vendor::find($id);
+        $vendor->delete();
+        Session::flash('success', 'Pemasok berhasil dihapus.');
+        return redirect('/vendor');
     }
     function customer() {
         $prov = provinsi::all();
