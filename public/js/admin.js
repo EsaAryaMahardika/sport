@@ -6,6 +6,7 @@ let component = new DataTable('#component');
 let production = new DataTable('#production');
 let customer = new DataTable('#customer');
 let vendor = new DataTable('#vendor');
+let purchase = new DataTable('#purchase');
 document.getElementById('addMaterialInput').addEventListener('click', function() {
     const template = document.getElementById('template');
     const inputMaterials = document.getElementById('inputMaterials');

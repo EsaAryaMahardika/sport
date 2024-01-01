@@ -6,7 +6,6 @@
 }
 
 .row input,
-.row input[type="radio"]+label,
 .row input[type="checkbox"]+label:before,
 .row select option,
 .row select {
@@ -36,11 +35,6 @@
     border-right-color: #d3ac2b;
 }
 
-.row input[type="radio"] {
-    display: none;
-}
-
-.row input[type="radio"]+label,
 .row select {
     display: inline-block;
     text-align: center;
@@ -48,18 +42,83 @@
     border-radius: 0;
 }
 
-.row input[type="radio"]+label:first-of-type {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+.wrapper {
+    display: inline-flex;
+    background: #fff;
+    height: 100px;
+    width: 400px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    padding: 20px 15px;
 }
 
-.row input[type="radio"]+label:last-of-type {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+.wrapper .option {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
 }
 
-.row input[type="radio"]+label i {
-    padding-right: 0.4em;
+.wrapper .option .dot {
+    height: 20px;
+    width: 20px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    position: relative;
+}
+
+.wrapper .option .dot::before {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #d3ac2b;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2 {
+    border-color: #d3ac2b;
+    background: #d3ac2b;
+}
+
+#option-1:checked:checked~.option-1 .dot,
+#option-2:checked:checked~.option-2 .dot {
+    background: #fff;
+}
+
+#option-1:checked:checked~.option-1 .dot::before,
+#option-2:checked:checked~.option-2 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wrapper .option span {
+    font-size: 20px;
+    color: #333d51;
+}
+
+#option-1:checked:checked~.option-1 span,
+#option-2:checked:checked~.option-2 span {
+    color: #fff;
 }
 
 .row input[type="checkbox"] {

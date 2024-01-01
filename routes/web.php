@@ -40,6 +40,7 @@ Route::delete('/component/{id}', [DBController::class, 'd_component']);
 
 Route::get('/production', [DBController::class, 'production']);
 Route::post('/production', [DBController::class, 'i_production']);
+Route::get('/ca/{id}', [DBController::class, 'ca']);
 Route::put('/start/{id}', [DBController::class, 'start']);
 Route::put('/mad/{id}', [DBController::class, 'mad']);
 Route::get('/reportPC/{id}', [DBController::class, 'r_production']);

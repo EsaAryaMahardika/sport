@@ -177,6 +177,10 @@ class DBController extends Controller
         Session::flash('success', 'Produk berhasil masuk antrean.');
         return redirect('/production');
     }
+    function ca($id) {
+        $CA = production::find($id);
+        return view('CA', compact('CA'));
+    }
     function start($id) {
         $production = production::find($id);
         $production->update([
@@ -215,16 +219,51 @@ class DBController extends Controller
         return view('reportPC', compact('production'));
     }
     function purchase() {
-        
+        $vendor = vendor::all();
+        $materials = materials::all();
+        $purchase = purchase::with('materials')->get();
+        return view('purchase', compact('materials', 'vendor', 'purchase'));
     }
     function i_purchase(Request $request) {
-        
+        $purchase = purchase::create([
+            'vendor_id' => $request->input('vendor_id'),
+            'total' => $request->input('total'),
+            'status' => 'PO'
+        ]);
+        $materialsID = $request->input('materials_id');
+        $jumlahMaterials = $request->input('jumlah');
+        $sync_data = [];
+        for($i = 0; $i < count($materialsID); $i++){
+            $sync_data[$materialsID[$i]] = ['jumlah' => $jumlahMaterials[$i]];
+        }
+        $purchase->materials()->attach($sync_data);
+        Session::flash('success', 'Pemesanan berhasil dibuat.');
+        return redirect('/purchase');
     }
-    function u_purchase(Request $request) {
-        
+    function confirm($id) {
+        $purchase = purchase::find($id);
+        $currentTime = Carbon::now();
+        $purchase->update([
+            'status' => 'confirm',
+            'updated_at' => $currentTime
+        ]);
+        Session::flash('success', 'Barang telah dikonfirmasi.');
+        return redirect('/purchase');
     }
-    function d_purchase($id) {
-        
+    function payment(Request $request, $id) {
+        $purchase = purchase::find($id);
+        $currentTime = Carbon::now();
+        $purchase->update([
+            'pembayaran' => $request->input('pembayaran'),
+            'status' => 'payment',
+            'updated_at' => $currentTime
+        ]);
+        Session::flash('success', 'Barang telah dibayar.');
+        return redirect('/purchase');
+    }
+    function invoicePurchase($id) {
+        $purchase = purchase::find($id);
+        return view('invoicePurchase', compact('purchase'));
     }
     function vendor() {
         $vendor = vendor::all();
