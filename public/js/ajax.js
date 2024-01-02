@@ -29,8 +29,19 @@ $(document).ready(function () {
         updatePrice($(this));
         updateTotalPrice();
     });
+    $('#inputMaterials').on('change input', 'select[name="materials_id[]"], input[name="jumlah[]"]', function() {
+        updatePriceSales($(this));
+        updateTotalPriceSales();
+    });
     function updatePrice(element) {
         const selectedMaterial = element.closest('.input-group').find('select[name="materials_id[]"] option:selected');
+        const hargaPerUnit = selectedMaterial.data('harga');
+        const jumlah = element.closest('.input-group').find('input[name="jumlah[]"]').val();
+        const totalPrice = parseFloat(hargaPerUnit) * parseFloat(jumlah);
+        element.closest('.input-group').find('.harga-label').val(totalPrice);
+    }
+    function updatePriceSales(element) {
+        const selectedMaterial = element.closest('.input-group').find('select[name="product_id[]"] option:selected');
         const hargaPerUnit = selectedMaterial.data('harga');
         const jumlah = element.closest('.input-group').find('input[name="jumlah[]"]').val();
         const totalPrice = parseFloat(hargaPerUnit) * parseFloat(jumlah);
@@ -40,6 +51,19 @@ $(document).ready(function () {
         let total = 0;
         $('#inputMaterials > div').each(function() {
             const selectedMaterial = $(this).find('select[name="materials_id[]"] option:selected');
+            const hargaPerUnit = parseFloat(selectedMaterial.data('harga'));
+            const jumlah = parseFloat($(this).find('input[name="jumlah[]"]').val());
+            const subtotal = hargaPerUnit * jumlah;
+            if (!isNaN(subtotal)) {
+                total += subtotal;
+            }
+        });
+        $('#totalPriceInput').val(total);
+    }
+    function updateTotalPriceSales() {
+        let total = 0;
+        $('#inputMaterials > div').each(function() {
+            const selectedMaterial = $(this).find('select[name="product_id[]"] option:selected');
             const hargaPerUnit = parseFloat(selectedMaterial.data('harga'));
             const jumlah = parseFloat($(this).find('input[name="jumlah[]"]').val());
             const subtotal = hargaPerUnit * jumlah;

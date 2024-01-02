@@ -97,7 +97,7 @@
             <td>{{ $item->pembayaran }}</td>
             <td>
                 @if ($item->status == 'order')
-                    <a href="" class="btn">Kirim Tagihan</a> | <a href="#pay{{ $item->id }}" onclick="tampilkanModal({{ $item->id }})" class="btn">Pembayaran</a> | <a href="#cancel{{ $item->id }}" class="btn">Batal</a>
+                    <a href="" class="btn">Kirim Tagihan</a> | <a href="#pay{{ $item->id }}" class="btn">Pembayaran</a> | <a href="#cancel{{ $item->id }}" class="btn">Batal</a>
                 @elseif($item->status == 'pay')
                     <a href="#delivery{{ $item->id }}" class="btn">Kirim</a>
                 @elseif($item->status == 'delivery')
