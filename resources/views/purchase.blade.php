@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', 'Penjualan')
+@section('title', 'Pembelian')
 @section('content')
 <div class="some-text">
     <a class="btn btn-input" href="#input">INPUT</a>
@@ -85,7 +85,7 @@
             </td>
             <td>
                 @foreach ($item->materials as $data)
-                    => {{ $data->harga }} <br>
+                    => {{ format_uang($data->harga) }} <br>
                 @endforeach
             </td>
             <td>
@@ -93,7 +93,7 @@
                     => {{ $data->pivot->jumlah }} <br>
                 @endforeach
             </td>
-            <td>{{ $item->total }}</td>
+            <td>{{ format_uang($item->total) }}</td>
             <td>{{ $item->pembayaran }}</td>
             <td>
                 @if ($item->status == 'PO')

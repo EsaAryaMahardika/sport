@@ -47,8 +47,9 @@ Route::get('/reportPC/{id}', [DBController::class, 'r_production']);
 
 Route::get('/purchase', [DBController::class, 'purchase']);
 Route::post('/purchase', [DBController::class, 'i_purchase']);
-Route::put('/purchase/{id}', [DBController::class, 'u_purchase']);
-Route::delete('/purchase/{id}', [DBController::class, 'd_purchase']);
+Route::put('/confirm/{id}', [DBController::class, 'confirm']);
+Route::put('/payment/{id}', [DBController::class, 'payment']);
+Route::get('/invoice/{id}', [DBController::class, 'invoicePurchase']);
 
 Route::get('/vendor', [DBController::class, 'vendor']);
 Route::post('/vendor', [DBController::class, 'i_vendor']);
@@ -62,7 +63,9 @@ Route::delete('/customer/{id}', [DBController::class, 'd_customer']);
 
 Route::get('/sales', [DBController::class, 'sales']);
 Route::post('/sales', [DBController::class, 'i_sales']);
-Route::put('/sales/{id}', [DBController::class, 'u_sales']);
-Route::delete('/sales/{id}', [DBController::class, 'd_sales']);
+Route::put('/pay/{id}', [DBController::class, 'pay']);
+Route::put('/delivery/{id}', [DBController::class, 'delivery']);
+Route::delete('/cancel/{id}', [DBController::class, 'cancel']);
+Route::get('/struct/{id}', [DBController::class, 'struct']);
 
 Route::get('kab/{id}', [DBController::class, 'kab']);

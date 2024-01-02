@@ -263,7 +263,7 @@ class DBController extends Controller
     }
     function invoicePurchase($id) {
         $purchase = purchase::find($id);
-        return view('invoicePurchase', compact('purchase'));
+        return view('invoice', compact('purchase'));
     }
     function vendor() {
         $vendor = vendor::all();
@@ -297,25 +297,70 @@ class DBController extends Controller
         Session::flash('success', 'Konsumen berhasil ditambahkan.');
         return redirect('/customer');
     }
-    function u_customer(Request $request) {
-        
+    function u_customer(Request $request, $id) {
+        $customer = customer::find($id);
+        $customer->update($request->all());
+        Session::flash('success', 'Konsumen berhasil diubah.');
+        return redirect('/customer');
     }
     function d_customer($id) {
-        
+        $customer = customer::find($id);
+        $customer->delete();
+        Session::flash('success', 'Konsumen berhasil dihapus.');
+        return redirect('/customer');
     }
     function sales() {
-        // $sales = sales::all();
-        return view('sales');
-        // return view('sales', compact('sales'));
+        $customer = customer::all();
+        $product = product::all();
+        $sales = sales::with('product')->get();
+        return view('sales', compact('sales', 'product', 'customer'));
     }
     function i_sales(Request $request) {
-        
+        $sales = sales::create([
+            'customer_id' => $request->input('customer_id'),
+            'total' => $request->input('total'),
+            'status' => 'order'
+        ]);
+        $productID = $request->input('product_id');
+        $jumlahProduct = $request->input('jumlah');
+        $sync_data = [];
+        for($i = 0; $i < count($productID); $i++){
+            $sync_data[$productID[$i]] = ['jumlah' => $jumlahProduct[$i]];
+        }
+        $sales->product()->attach($sync_data);
+        Session::flash('success', 'Pesanan berhasil dibuat.');
+        return redirect('/sales');
     }
-    function u_sales(Request $request) {
-        
+    function pay(Request $request, $id) {
+        $sales = sales::find($id);
+        $currentTime = Carbon::now();
+        $sales->update([
+            'pembayaran' => $request->input('pembayaran'),
+            'status' => 'pay',
+            'updated_at' => $currentTime
+        ]);
+        Session::flash('success', 'Pembayaran telah dikonfirmasi.');
+        return redirect('/sales');
     }
-    function d_sales($id) {
-        
+    function delivery($id) {
+        $sales = sales::find($id);
+        $currentTime = Carbon::now();
+        $sales->update([
+            'status' => 'delivery',
+            'updated_at' => $currentTime
+        ]);
+        Session::flash('success', 'Barang telah dikirim.');
+        return redirect('/sales');
+    }
+    function cancel($id) {
+        $sales = sales::find($id);
+        $sales->product()->detach();
+        Session::flash('success', 'Pesanan berhasil dibatalkan.');
+        return redirect('/sales');
+    }
+    function struct($id) {
+        $sales = sales::find($id);
+        return view('struct', compact('sales'));
     }
     public function kab($id)
     {

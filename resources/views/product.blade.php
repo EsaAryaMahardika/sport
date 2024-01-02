@@ -61,7 +61,7 @@
       <td>{{ $loop->iteration }}</td>
       <td>{{ $item->nama }}</td>
       <td>{{ $item->category['nama'] }}</td>
-      <td>{{ $item->harga }}</td>
+      <td>{{ format_uang($item->harga) }}</td>
       <td>{{ $item->stok }}</td>
       <td>{{ $item->factory['nama'] }}</td>
       <td><img src="{{ asset('img/' . $item->foto) }}"></td>

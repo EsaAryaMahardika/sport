@@ -37,7 +37,7 @@
     <tr>
       <td>{{ $loop->iteration }}</td>
       <td>{{ $item->nama }}</td>
-      <td>{{ $item->harga }}</td>
+      <td>{{ format_uang($item->harga) }}</td>
       <td>{{ $item->stok }}</td>
       <td>
         <a href="#edit{{ $item->id }}" class="btn">Edit</a> | <a href="#delete{{ $item->id }}" class="btn">Hapus</a>
