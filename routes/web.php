@@ -67,4 +67,6 @@ Route::put('/delivery/{id}', [DBController::class, 'delivery']);
 Route::delete('/cancel/{id}', [DBController::class, 'cancel']);
 Route::get('/struct/{id}', [DBController::class, 'struct']);
 
+Route::get('/accounting', [DBController::class, 'accounting']);
+
 Route::get('kab/{id}', [DBController::class, 'kab']);

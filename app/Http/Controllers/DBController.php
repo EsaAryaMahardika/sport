@@ -392,6 +392,11 @@ class DBController extends Controller
         $sales = sales::find($id);
         return view('struct', compact('sales'));
     }
+    function accounting() {
+        $sales = sales::all();
+        $purchase = purchase::all();
+        return view('accounting', compact('sales', 'purchase'));
+    }
     public function kab($id)
     {
         $data = kabupaten::where('prov_id', $id)->pluck('nama', 'id')->toArray();

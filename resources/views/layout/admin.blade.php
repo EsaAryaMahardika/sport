@@ -40,6 +40,8 @@
                         Pelanggan</span></a></li>
             <li class="has-subnav"><a href="/sales"><i class="fa fa-money fa-2x"></i><span class="nav-text">
                         Penjualan</span></a></li>
+            <li class="has-subnav"><a href="/accounting"><i class="fa fa-calculator fa-2x"></i><span class="nav-text">
+                        Akuntansi</span></a></li>
         </ul>
         <ul class="logout">
             <li><a href="#"><i class="fa fa-power-off fa-2x"></i><span class="nav-text"> Logout</span></a></li>
@@ -60,7 +62,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/fc-4.2.2/fh-3.3.2/r-2.4.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="js/admin.js"></script>
     <script src="js/ajax.js"></script>
     @stack('script')
 </body>

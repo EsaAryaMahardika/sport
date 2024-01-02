@@ -93,4 +93,16 @@ $(document).ready(function () {
     addInputHandler('addMaterialInput', 'inputMaterials');
     addInputHandler('addProductInput', 'inputProduct');
     
+    $(document).ready(function() {
+        let category = $("#category").DataTable();
+        let factory = $("#factory").DataTable();
+        let product = $("#product").DataTable();
+        let materials = $("#materials").DataTable();
+        let component = $("#component").DataTable();
+        let production = $("#production").DataTable();
+        let customer = $("#customer").DataTable();
+        let vendor = $("#vendor").DataTable();
+        let purchase = $("#purchase").DataTable();
+        let sales = $("#sales").DataTable();
+      });      
 });

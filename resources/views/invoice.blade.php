@@ -28,17 +28,17 @@
 
         .purchase-order-logo {
             text-align: left;
-
+            
         }
 
         .purchase-order-logo img {
-            max-width: 100px;
+            max-width: 100px; /* Sesuaikan dengan ukuran logo Anda */
             height: auto;
         }
 
         .purchase-order-details {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             margin-bottom: 20px;
         }
 
@@ -48,11 +48,25 @@
             margin-bottom: 20px;
         }
 
-        .purchase-order-items th,
-        .purchase-order-items td {
+        .purchase-order-items th, .purchase-order-items td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+        }
+
+        .purchase-order-total {
+            text-align: right;
+            font-weight: bold;
+            padding-right: 40px;
+        }
+
+        .purchase-order-Amount {
+            text-align: right;
+            font-weight: bold;
+            padding-right: 50px;
+        }
+        .Underlined {
+            text-align: right;
         }
     </style>
 </head>
@@ -81,7 +95,7 @@
                     <th>Bahan Baku</th>
                     <th>Jumlah</th>
                     <th>Harga Satuan</th>
-                    <th>Total</th>
+                    <th>Sub Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -101,12 +115,28 @@
                             => {{ format_uang($data->harga) }} <br>
                         @endforeach
                     </td>
-                    <td>{{ format_uang($purchase->total) }}</td>
+                    <td>
+                        @foreach ($purchase->materials as $data)
+                            => {{ format_uang($data->harga * $data->pivot->jumlah) }} <br>
+                        @endforeach
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <div class="purchase-order-header">
-            <h2>Pembayaran: {{ $purchase->pembayaran }}</h2>
+        <div class="Underlined">
+            <p>__________________________________</p>
+        </div>
+        <div class="purchase-order-total">
+            <p>Total Pembelian: {{ format_uang($purchase->total) }}</p>
+        </div>
+        <div class="purchase-order-total">
+            <p>Dibayar Pada {{ date('d-m-Y', strtotime($purchase->updated_at)) }}</p>
+        </div>
+        <div class="Underlined">
+            <p>__________________________________</p>
+        </div>
+        <div class="purchase-order-Amount">
+            <p>Metode Pembayaran: {{ $purchase->pembayaran }}</p>
         </div>
     </div>
 </body>
