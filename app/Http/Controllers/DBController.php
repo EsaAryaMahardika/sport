@@ -12,6 +12,7 @@ use App\Models\production;
 use App\Models\purchase;
 use App\Models\vendor;
 use App\Models\sales;
+use App\Models\PurchaseList;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -177,10 +178,6 @@ class DBController extends Controller
         Session::flash('success', 'Produk berhasil masuk antrean.');
         return redirect('/production');
     }
-    function ca($id) {
-        $CA = production::find($id);
-        return view('CA', compact('CA'));
-    }
     function start($id) {
         $production = production::find($id);
         $production->update([
@@ -258,6 +255,22 @@ class DBController extends Controller
             'status' => 'payment',
             'updated_at' => $currentTime
         ]);
+        $purchase_id = $purchase->id;
+        // Dapatkan data produk yang dibeli dari tabel pivot 'purchaselist'
+        $purchaselist = Purchaselist::where('purchase_id', $purchase_id)->get();
+        // Loop untuk setiap produk yang dibeli dalam pembelian
+        foreach ($purchaselist as $item) {
+            $materials_id = $item->materials_id;
+            $jumlah = $item->jumlah;
+            // Temukan produk sesuai dengan ID
+            $materials = materials::find($materials_id);
+            // Pastikan produk ditemukan
+            if ($materials) {
+                // Tambahkan jumlah produk ke dalam stok produk
+                $materials->stok += $jumlah;
+                $materials->save();
+            }
+        }
         Session::flash('success', 'Barang telah dibayar.');
         return redirect('/purchase');
     }

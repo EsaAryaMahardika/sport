@@ -29,10 +29,10 @@ $(document).ready(function () {
         updatePrice($(this));
         updateTotalPrice();
     });
-    $('#inputMaterials').on('change input', 'select[name="materials_id[]"], input[name="jumlah[]"]', function() {
-        updatePriceSales($(this));
-        updateTotalPriceSales();
-    });
+    // $('#inputMaterials').on('change input', 'select[name="materials_id[]"], input[name="jumlah[]"]', function() {
+    //     updatePriceSales($(this));
+    //     updateTotalPriceSales();
+    // });
     function updatePrice(element) {
         const selectedMaterial = element.closest('.input-group').find('select[name="materials_id[]"] option:selected');
         const hargaPerUnit = selectedMaterial.data('harga');

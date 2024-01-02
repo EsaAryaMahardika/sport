@@ -14,7 +14,7 @@
                     <select name="vendor_id">
                         <option value="">Pilih Vendor</option>
                         @foreach ($vendor as $ven)
-                            <option value="{{ $ven->id }}">{{ $ven->nama }}</option>
+                            <option value="{{ $ven->id }}">{{ $ven->nama }} - {{ $ven->keterangan }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -128,18 +128,11 @@
                     <div class="row">
                         <h2>Metode Pembayaran</h2>
                         <div class="center">
-                            <div class="wrapper">
-                                <input type="radio" name="pembayaran" id="option-1" value="Transfer">
-                                <input type="radio" name="pembayaran" id="option-2" value="Tunai">
-                                    <label for="option-1" class="option option-1">
-                                        <div class="dot"></div>
-                                        <span>Transfer</span>
-                                    </label>
-                                    <label for="option-2" class="option option-2">
-                                        <div class="dot"></div>
-                                        <span>Tunai</span>
-                                  </label>
-                            </div>
+                            <select name="pembayaran">
+                                <option value="">Pilih Metode Pembayaran</option>
+                                <option value="Transfer">Transfer</option>
+                                <option value="Tunai">Tunai</option>
+                            </select>
                         </div>
                     </div>
                     <a href="#" class="btn">Close</a>

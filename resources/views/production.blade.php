@@ -78,7 +78,7 @@
             <div class="col-third">Stok</div>
           </div>
           @php
-            $canProduce = false;
+            $canProduce = true;
           @endphp
           <div class="input-group">
             @foreach ($item->materials as $data)
@@ -91,9 +91,9 @@
               <div class="col-third">
                 {{ $data->stok }}
               </div>
-              @if ($data->pivot->jumlah < $data->stok)
+              @if ($data->pivot->jumlah > $data->stok)
                 @php
-                  $canProduce = true
+                  $canProduce = false
                 @endphp
               @endif
             @endforeach
