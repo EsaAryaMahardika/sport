@@ -18,7 +18,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div id="inputMaterials">
+                <div id="inputProduct">
                     <div>
                         <div class="col-third">
                             <label>Produk</label>
@@ -35,7 +35,11 @@
                             <select name="product_id[]">
                                 <option value="">Pilih Produk</option>
                                 @foreach ($product as $pro)
-                                    <option value="{{ $pro->id }}" data-harga="{{ $pro->harga }}">{{ $pro->nama }}</option>
+                                    @if ($pro->stok == 0)
+                                        <option disabled value="{{ $pro->id }}" data-harga="{{ $pro->harga }}">{{ $pro->nama }} (Produk Kosong)</option>
+                                    @else    
+                                        <option value="{{ $pro->id }}" data-harga="{{ $pro->harga }}">{{ $pro->nama }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -48,7 +52,7 @@
                     </div>
                 </div>
                 <div class="center">
-                    <button type="button" class="btn" id="addMaterialInput">+</button>
+                    <button type="button" class="btn" id="addProductInput">+</button>
                 </div>
                 <div class="input-group">
                     <label>Total</label>
@@ -142,18 +146,11 @@
                     <div class="row">
                         <h2>Metode Pembayaran</h2>
                         <div class="center">
-                            <div class="wrapper">
-                                <input type="radio" name="pembayaran" id="option-1" value="Transfer">
-                                <input type="radio" name="pembayaran" id="option-2" value="Tunai">
-                                    <label for="option-1" class="option option-1">
-                                        <div class="dot"></div>
-                                        <span>Transfer</span>
-                                    </label>
-                                    <label for="option-2" class="option option-2">
-                                        <div class="dot"></div>
-                                        <span>Tunai</span>
-                                  </label>
-                            </div>
+                            <select name="pembayaran">
+                                <option value="">Pilih Metode Pembayaran</option>
+                                <option value="Transfer">Transfer</option>
+                                <option value="Tunai">Tunai</option>
+                            </select>
                         </div>
                     </div>
                     <a href="#" class="btn">Close</a>

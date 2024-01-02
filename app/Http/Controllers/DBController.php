@@ -13,6 +13,7 @@ use App\Models\purchase;
 use App\Models\vendor;
 use App\Models\sales;
 use App\Models\PurchaseList;
+use App\Models\SalesList;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -362,6 +363,22 @@ class DBController extends Controller
             'status' => 'delivery',
             'updated_at' => $currentTime
         ]);
+        $sales_id = $sales->id;
+        // Dapatkan data produk yang dibeli dari tabel pivot 'purchaselist'
+        $saleslist = SalesList::where('sales_id', $sales_id)->get();
+        // Loop untuk setiap produk yang dibeli dalam pembelian
+        foreach ($saleslist as $item) {
+            $product_id = $item->product_id;
+            $jumlah = $item->jumlah;
+            // Temukan produk sesuai dengan ID
+            $product = product::find($product_id);
+            // Pastikan produk ditemukan
+            if ($product) {
+                // Tambahkan jumlah produk ke dalam stok produk
+                $product->stok -= $jumlah;
+                $product->save();
+            }
+        }
         Session::flash('success', 'Barang telah dikirim.');
         return redirect('/sales');
     }

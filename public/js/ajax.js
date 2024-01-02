@@ -29,10 +29,10 @@ $(document).ready(function () {
         updatePrice($(this));
         updateTotalPrice();
     });
-    // $('#inputMaterials').on('change input', 'select[name="materials_id[]"], input[name="jumlah[]"]', function() {
-    //     updatePriceSales($(this));
-    //     updateTotalPriceSales();
-    // });
+    $('#inputProduct').on('change input', 'select[name="product_id[]"], input[name="jumlah[]"]', function() {
+        updatePriceSales($(this));
+        updateTotalPriceSales();
+    });
     function updatePrice(element) {
         const selectedMaterial = element.closest('.input-group').find('select[name="materials_id[]"] option:selected');
         const hargaPerUnit = selectedMaterial.data('harga');
@@ -62,7 +62,7 @@ $(document).ready(function () {
     }
     function updateTotalPriceSales() {
         let total = 0;
-        $('#inputMaterials > div').each(function() {
+        $('#inputProduct > div').each(function() {
             const selectedMaterial = $(this).find('select[name="product_id[]"] option:selected');
             const hargaPerUnit = parseFloat(selectedMaterial.data('harga'));
             const jumlah = parseFloat($(this).find('input[name="jumlah[]"]').val());
@@ -77,4 +77,20 @@ $(document).ready(function () {
         const selectedPrice = element.find('option:selected').data('price');
         element.closest('.row').find('input[name="harga"]').val(selectedPrice);
     }
+    function addInputHandler(addButtonId, inputContainerId) {
+        $('#' + addButtonId).on('click', function() {
+            const template = $('#template').get(0);
+            const inputContainer = $('#' + inputContainerId);
+            const newInput = $(template).clone().css('display', 'block');
+            const deleteButton = $('<button>').text('Hapus').on('click', function() {
+                $(this).parent().remove();
+            });
+            newInput.append(deleteButton);
+            inputContainer.append(newInput);
+        });
+    }
+    // Memanggil fungsi addInputHandler dengan ID yang berbeda untuk masing-masing tombol
+    addInputHandler('addMaterialInput', 'inputMaterials');
+    addInputHandler('addProductInput', 'inputProduct');
+    
 });

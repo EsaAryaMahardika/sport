@@ -65,8 +65,8 @@
     <div class="popup" id="edit{{ $item->id }}">
       <div class="popup__content">
         <div class="row">
-          <h2>Teknisi</h2>
-          <form action="/u_customer/{{ $item->id }}" method="POST">
+          <h2>Konsumen</h2>
+          <form action="/customer/{{ $item->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row">
@@ -102,7 +102,7 @@
     {{-- MODAL DELETE --}}
     <div class="popup" id="delete{{ $item->id }}">
       <div class="popup__content">
-        <form action="d_customer/{{ $item->id }}" method="POST">
+        <form action="customer/{{ $item->id }}" method="POST">
           @csrf
           @method('DELETE')
           <p class="popup__text">
