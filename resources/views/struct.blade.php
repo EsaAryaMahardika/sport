@@ -99,28 +99,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        @foreach ($sales->product as $data)
-                            => {{ $data->nama }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($sales->product as $data)
-                            => {{ $data->pivot->jumlah }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($sales->product as $data)
-                            => {{ format_uang($data->harga) }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($sales->product as $data)
-                            => {{ format_uang($data->harga * $data->pivot->jumlah) }} <br>
-                        @endforeach
-                    </td>
-                </tr>
+                @foreach ($sales->product as $data)
+                    <tr>
+                        <td>{{ $data->nama }}</td>
+                        <td>{{ $data->pivot->jumlah }}</td>
+                        <td>{{ format_uang($data->harga) }}</td>
+                        <td>{{ format_uang($data->harga * $data->pivot->jumlah) }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         <div class="Underlined">
@@ -130,7 +116,7 @@
             <p>Total Pembelian: {{ format_uang($sales->total) }}</p>
         </div>
         <div class="purchase-order-total">
-            <p>Dibayar Pada {{ date('d-m-Y', strtotime($sales->updated_at)) }}</p>
+            <p>Dikirim: {{ date('d-m-Y', strtotime($sales->updated_at)) }}</p>
         </div>
         <div class="Underlined">
             <p>__________________________________</p>

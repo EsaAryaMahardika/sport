@@ -326,3 +326,12 @@ footer {
     border-color: #8a5700;
     color: #8a5700;
   }
+  .subheader {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #d3ac2b;
+    background-color: #333d51;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+  }

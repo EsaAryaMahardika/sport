@@ -68,5 +68,13 @@ Route::delete('/cancel/{id}', [DBController::class, 'cancel']);
 Route::get('/struct/{id}', [DBController::class, 'struct']);
 
 Route::get('/accounting', [DBController::class, 'accounting']);
+Route::get('/accPurchase', [DBController::class, 'accPurchase']);
+Route::get('/accSales', [DBController::class, 'accSales']);
+
+Route::get('/employee', [DBController::class, 'employee']);
+Route::get('/idcard/{id}', [DBController::class, 'idcard']);
+Route::post('/employee', [DBController::class, 'i_employee']);
+Route::put('/employee/{id}', [DBController::class, 'u_employee']);
+Route::delete('/employee/{id}', [DBController::class, 'd_employee']);
 
 Route::get('kab/{id}', [DBController::class, 'kab']);

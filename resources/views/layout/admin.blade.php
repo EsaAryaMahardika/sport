@@ -42,6 +42,8 @@
                         Penjualan</span></a></li>
             <li class="has-subnav"><a href="/accounting"><i class="fa fa-calculator fa-2x"></i><span class="nav-text">
                         Akuntansi</span></a></li>
+            <li class="has-subnav"><a href="/employee"><i class="fa fa-users fa-2x"></i><span class="nav-text">
+                        Jabatan</span></a></li>
         </ul>
         <ul class="logout">
             <li><a href="#"><i class="fa fa-power-off fa-2x"></i><span class="nav-text"> Logout</span></a></li>

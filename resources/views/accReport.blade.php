@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice Pembelian</title>
+    <title>Struk Penjualan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,65 +78,39 @@
             <img src="{{ asset('img/logo.png') }}" alt="Company Logo">
         </div>
         <div class="purchase-order-header">
-            <h2>Invoice #{{ $purchase->referensi }}</h2>
+            <h2>Rekapan Invoice {{ Session::get('pelaku') }}</h2>
         </div>
-        <div class="purchase-order-details">
-            <div>
-                <p><strong>Pemasok:</strong> {{ $purchase->vendor['nama'] }}</p>
-                <p>{{ $purchase->vendor['alamat'] }}</p>
-                <p>{{ $purchase->vendor->kab['nama'] }}</p>
-                <p>{{ $purchase->vendor->prov['nama'] }}</p>
-            </div>
-        </div>
-
+        @php
+            $total = 0;
+        @endphp
         <table class="purchase-order-items">
             <thead>
                 <tr>
-                    <th>Bahan Baku</th>
-                    <th>Jumlah</th>
-                    <th>Harga Satuan</th>
-                    <th>Sub Total</th>
+                    <th>Invoice</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Total</th>
+                    <th>Metode Pembayaran</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        @foreach ($purchase->materials as $data)
-                            => {{ $data->nama }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($purchase->materials as $data)
-                            => {{ $data->pivot->jumlah }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($purchase->materials as $data)
-                            => {{ format_uang($data->harga) }} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($purchase->materials as $data)
-                            => {{ format_uang($data->harga * $data->pivot->jumlah) }} <br>
-                        @endforeach
-                    </td>
-                </tr>
+                @foreach ($accounting as $item)
+                    <tr>
+                        <td>{{ $item->referensi }}</td>
+                        <td>{{ date('d-m-Y', strtotime($item->updated_at)) }}</td>
+                        <td>{{ format_uang($item->total) }}</td>
+                        <td>{{ $item->pembayaran }}</td>
+                    </tr>
+                    @php
+                        $total += $item->total;
+                    @endphp
+                @endforeach
             </tbody>
         </table>
         <div class="Underlined">
             <p>__________________________________</p>
         </div>
         <div class="purchase-order-total">
-            <p>Total Pembelian: {{ format_uang($purchase->total) }}</p>
-        </div>
-        <div class="purchase-order-total">
-            <p>Diterima: {{ date('d-m-Y', strtotime($purchase->updated_at)) }}</p>
-        </div>
-        <div class="Underlined">
-            <p>__________________________________</p>
-        </div>
-        <div class="purchase-order-Amount">
-            <p>Metode Pembayaran: {{ $purchase->pembayaran }}</p>
+            <p>Total: {{ format_uang($total) }}</p>
         </div>
     </div>
 </body>

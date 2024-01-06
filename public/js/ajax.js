@@ -104,5 +104,6 @@ $(document).ready(function () {
         let vendor = $("#vendor").DataTable();
         let purchase = $("#purchase").DataTable();
         let sales = $("#sales").DataTable();
+        let employee = $("#employee").DataTable();
       });      
 });

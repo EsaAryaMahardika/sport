@@ -14,6 +14,9 @@ use App\Models\vendor;
 use App\Models\sales;
 use App\Models\PurchaseList;
 use App\Models\SalesList;
+use App\Models\departemen;
+use App\Models\jobposition;
+use App\Models\employee;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -396,6 +399,43 @@ class DBController extends Controller
         $sales = sales::all();
         $purchase = purchase::all();
         return view('accounting', compact('sales', 'purchase'));
+    }
+    function accPurchase() {
+        $accounting = purchase::all();
+        Session::flash('pelaku', 'Pembelian');
+        return view('accReport', compact('accounting'));
+    }
+    function accSales() {
+        $accounting = sales::all();
+        Session::flash('pelaku', 'Penjualan');
+        return view('accReport', compact('accounting'));
+    }
+    function employee() {
+        $depart = departemen::all();
+        $jobpos = jobposition::all();
+        $employee = employee::all();
+        return view('employee', compact('depart','jobpos', 'employee'));
+    }
+    function i_employee(Request $request) {
+        employee::create($request->all());
+        Session::flash('success', 'Pegawai berhasil ditambahkan.');
+        return redirect('/employee');
+    }
+    function u_employee(Request $request, $id) {
+        $employee = employee::find($id);
+        $employee->update($request->all());
+        Session::flash('success', 'Pegawai berhasil diubah.');
+        return redirect('/employee');
+    }
+    function d_employee($id) {
+        $employee = employee::find($id);
+        $employee->delete();
+        Session::flash('success', 'Pegawai berhasil dihapus.');
+        return redirect('/employee');
+    }
+    function idcard($id) {
+        $employee = employee::find($id);
+        return view('idcard', compact('employee'));
     }
     public function kab($id)
     {
